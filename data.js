@@ -11,79 +11,79 @@ const CHARACTERS = [
     name: "Gon Freecss",
     aff: "Association des Hunters",
     nen: "Renforcement",
-    power: "Jajanken (Pierre-Feuille-Ciseaux) : concentre son aura pour un coup amplifié dévastateur (Pierre), un projectile d'aura (Feuille) ou une lame d'aura (Ciseaux)."
+    power: "Jajanken, inspiré de pierre-feuille-ciseaux : Pierre, coup de poing en Renforcement concentrant toute son aura via le Ko ; Feuille, projectile d'aura émis de la paume (sa version la moins maîtrisée) ; Ciseaux, lame d'aura transmutée au bout des doigts. Par un vœu désespéré, il peut sacrifier tout son potentiel futur pour atteindre une forme adulte d'une puissance colossale — au prix de l'accès au Nen."
   },
   {
     name: "Killua Zoldyck",
     aff: "Famille Zoldyck",
     nen: "Transformation",
-    power: "Transforme son aura en électricité (Foudre). Godspeed (Kanmuru) : décharge son corps de courant pour une vitesse et des réflexes quasi instantanés."
+    power: "Transmute son aura en électricité : Coup de foudre (décharge au contact), Éclair (foudre paralysante projetée des doigts). Godspeed (Kanmuru) combine Tourbillon — son aura commande directement ses muscles pour des réflexes quasi instantanés — et Vitesse de l'éclair, qui lui conserve le contrôle de ses mouvements à très grande vitesse."
   },
   {
     name: "Kurapika",
     aff: "Clan Kurta · Garde du Prince Woble",
     nen: "Matérialisation (Spécialiste sous Emperor Time)",
-    power: "Cinq chaînes Nen : Chain Jail (emprisonne la Brigade Fantôme), Dowsing Chain, Holy Chain (soin), Judgment Chain (serment mortel) et Steal Chain qui vole les capacités d'autrui. Yeux écarlates."
+    power: "Cinq chaînes au bout des doigts : Chain Jail (emprisonne et neutralise le Nen, pensée contre la Brigade Fantôme), Dowsing Chain (radar/pendule), Holy Chain (soin), Judgment Chain (serment mortel planté dans le cœur) et Steal Chain qui vole les capacités d'autrui. Ses Yeux écarlates et Emperor Time portent toutes ses catégories à 100 %."
   },
   {
     name: "Leorio Paradinight",
     aff: "Association des Hunters (Zodiaque « Sanglier »)",
     nen: "Émission",
-    power: "Médecin. Peut projeter son poing à distance en le faisant surgir à travers une surface."
+    power: "Médecin. Émetteur : peut faire surgir son poing à distance à travers une surface (en frappant le sol, son poing jaillit près de la cible)."
   },
   {
     name: "Hisoka Morow",
     aff: "Ancien membre de la Brigade Fantôme (#4)",
     nen: "Transformation",
-    power: "Bungee Gum : aura élastique et collante (« mes deux qualités »). Texture Surprise : recouvre une surface d'une fausse texture pour tromper l'ennemi."
+    power: "Bungee Gum : transforme son aura en une matière à la fois élastique et collante, attachée ou détachée à volonté. Texture Surprise : un film d'aura qui reproduit l'apparence d'une surface (jusqu'à l'écriture) pour tromper l'œil. À sa mort, un Nen post-mortem programmé relance son cœur, puis il recrée ses membres manquants avec ses deux capacités."
   },
   {
     name: "Chrollo Lucilfer",
     aff: "Chef de la Brigade Fantôme",
     nen: "Spécialiste",
-    power: "Skill Hunter (Bandit's Secret) : un grimoire qui vole et stocke les capacités Nen d'autrui, utilisables tant que certaines conditions sont remplies."
+    power: "Skill Hunter (Bandit's Secret) : un grimoire qui vole le Hatsu d'autrui si trois conditions sont réunies en une heure (voir la capacité, interroger son auteur, lui faire toucher la paume du livre). Capacités dérobées notables : Indoor Fish (poissons squelettes dévoreurs), Order Stamp (marionnettise un objet à tête), Convert Hands, Black Voice, The Sun and Moon, Gallery Fake…"
   },
   {
     name: "Illumi Zoldyck",
     aff: "Famille Zoldyck · Brigade Fantôme (#11)",
     nen: "Manipulation",
-    power: "Contrôle ses victimes au moyen d'aiguilles Nen plantées dans leur corps, modifiant leur comportement, leur apparence ou les transformant en marionnettes."
+    power: "Contrôle ses victimes au moyen d'aiguilles Nen plantées dans leur corps, modifiant leur comportement ou leur apparence, voire les transformant en marionnettes au combat. Peut aussi se programmer lui-même via une aiguille."
   },
   {
     name: "Ging Freecss",
     aff: "Association des Hunters (Hunter Double Étoile)",
     nen: "Polyvalent (maîtrise exceptionnelle)",
-    power: "Père de Gon. Considéré comme l'un des Nen-users les plus complets ; maîtrise les six catégories à très haut niveau."
+    power: "Père de Gon. Considéré comme l'un des Nen-users les plus complets ; maîtrise les six catégories à très haut niveau et excelle dans la restauration de ruines (archéologie)."
   },
   {
     name: "Isaac Netero",
     aff: "Ancien Président de l'Association des Hunters",
     nen: "Renforcement",
-    power: "Centième Main de Guanyin (Bodhisattva) : statue Nen géante frappant à la vitesse de la prière de Netero. Rose Miniature (bombe à la mort)."
+    power: "Centième Main de Guanyin (Bodhisattva) : une statue Nen géante qui frappe à la vitesse de la prière de Netero (forgée par le Zen). Ultime recours : la Rose Miniature, une bombe à neutrons dissimulée en lui (Poor Man's Rose)."
   },
   {
     name: "Meruem",
     aff: "Roi des Fourmis-Chimères",
     nen: "Spécialiste",
-    power: "Puissance, vitesse et intelligence colossales. Peut absorber l'aura et les facultés des Nen-users qu'il dévore. En d'une portée immense."
+    power: "Puissance, vitesse et intellect prodigieux. Sa Synthèse d'aura lui permet d'absorber l'aura — et les facultés — des Nen-users qu'il dévore ou frappe (Rage Blast / Photon). Après avoir absorbé une partie de ses Gardes, il gagne des ailes et un vol fulgurant. En d'une portée colossale."
   },
   {
     name: "Neferpitou",
     aff: "Garde Royal (Fourmis-Chimères)",
     nen: "Spécialiste",
-    power: "Terpsichora : marionnettes contrôlées par fils d'aura (même après sa mort). Doctor Blythe : marionnette soignante."
+    power: "Terpsichora : un marionnettiste spectral qui anime les morts — et le corps même de Pitou — comme des pantins, y compris après sa mort. Doctor Blythe : une marionnette soignante, stationnaire et rattachée à sa queue dans un rayon limité, qui l'immobilise tant qu'elle l'emploie."
   },
   {
     name: "Shaiapouf",
     aff: "Garde Royal (Fourmis-Chimères)",
     nen: "Manipulation / Matérialisation",
-    power: "Beelzebub : peut se diviser en multiples clones et insectes-écailles pour espionner et manipuler, au prix d'une perte de puissance."
+    power: "Beelzebub : se divise en une nuée de formes-écailles, chacune affectée à une tâche (surveillance, copie imparfaite de lui-même, diversion, fuite), au prix d'une dispersion de sa puissance."
   },
   {
     name: "Menthuthuyoupi",
     aff: "Garde Royal (Fourmis-Chimères)",
-    nen: "Renforcement / Transformation",
-    power: "Métamorphoses corporelles et régénération extrême ; transforme ses émotions en puissance physique brute."
+    nen: "Transformation",
+    power: "Métamorphose : remodèle n'importe quelle partie de son corps (bras supplémentaires, membres en tentacules extensibles, régénération, ailes). Sa rage alimente sa puissance brute jusqu'à atteindre la forme « Rage Incarnate »."
   },
   {
     name: "Biscuit Krueger",
@@ -95,61 +95,61 @@ const CHARACTERS = [
     name: "Kite",
     aff: "Disciple de Ging · Hunter",
     nen: "Matérialisation / Spécialiste",
-    power: "Crazy Slots (Conjurer's Crazy Roulette) : une roulette aléatoire détermine l'arme matérialisée qu'il obtient, dont la faux « Silent Waltz »."
+    power: "Crazy Slots (Conjurer's Crazy Roulette) : une roulette aléatoire détermine l'arme matérialisée obtenue (1 à 9), dont la faux « Silent Waltz » ; le numéro 0 lui est fatal."
   },
   {
     name: "Knuckle Bine",
     aff: "Disciple de Morel · Hunter",
     nen: "Émission",
-    power: "Hakoware (A.P.R.) : impose des « intérêts » d'aura à l'adversaire ; quand la dette dépasse l'aura de la cible, celle-ci perd l'accès au Nen (banqueroute)."
+    power: "Hakoware (A.P.R.) : son « Lecteur » impose des intérêts d'aura à l'adversaire à chaque coup ; quand la dette dépasse l'aura de la cible, celle-ci fait « banqueroute » et perd l'accès au Nen 30 jours."
   },
   {
     name: "Shoot McMahon",
     aff: "Disciple de Morel · Hunter",
     nen: "Matérialisation / Manipulation",
-    power: "Hôtel Rafflesia : mains flottantes et une cage volante qui emprisonnent et démembrent les cibles."
+    power: "Hôtel Rafflesia : des mains flottantes et une cage volante qui saisissent, emprisonnent et démembrent les cibles dans un espace dont il fixe les règles."
   },
   {
     name: "Morel Mackernasey",
     aff: "Hunter (Single Star) · Mentor",
     nen: "Émission",
-    power: "Deep Purple : manipule la fumée de sa pipe pour créer des clones, des murs ou des marionnettes de fumée."
+    power: "Deep Purple : manipule la fumée de sa pipe pour créer des clones, des murs, des marionnettes ou des bombes de fumée."
   },
   {
     name: "Palm Siberia",
     aff: "Alliée · ex-Fourmi-Chimère",
     nen: "Manipulation / Matérialisation",
-    power: "Wink Blue : miroir de divination permettant d'espionner une cible. Plus tard, capacités renforcées de Fourmi-Chimère."
+    power: "Wink Blue (Soin de Beauté) : un miroir de divination qui espionne une cible déjà rencontrée. Devenue Fourmi-Chimère, elle gagne des capacités physiques renforcées."
   },
   {
     name: "Feitan Portor",
     aff: "Brigade Fantôme",
     nen: "Transformation",
-    power: "Pain Packer (Rising Sun / Pain Releaser) : plus il souffre, plus son attaque solaire dégage chaleur et lumière destructrices."
+    power: "Pain Packer (Rising Sun) : plus il a souffert, plus son attaque solaire — déclenchée sous une cape — dégage une chaleur et une lumière destructrices proportionnelles à sa douleur."
   },
   {
     name: "Zeno Zoldyck",
     aff: "Famille Zoldyck",
     nen: "Transformation",
-    power: "Dragon Dive / Dragon Head : sculpte son aura en dragons offensifs lancés sur de larges zones."
+    power: "Dragon Dive / Dragon Lance : sculpte son aura en dragons offensifs lancés sur de larges zones ou concentrés en une lance perforante."
   },
   {
     name: "Silva Zoldyck",
     aff: "Famille Zoldyck (chef)",
     nen: "Transformation",
-    power: "Assassin d'élite ; sphères d'aura explosives et puissance physique de très haut niveau."
+    power: "Chef des assassins Zoldyck. Sphères d'aura explosives projetées à distance et puissance physique de très haut niveau."
   },
   {
     name: "Wing",
     aff: "Hunter · Maître de Nen",
     nen: "Renforcement",
-    power: "Instructeur de Gon, Killua et Zushi ; enseigne les bases du Nen (Ten, Zetsu, Ren, Hatsu)."
+    power: "Instructeur de Gon, Killua et Zushi ; enseigne les quatre techniques fondamentales du Nen (Ten, Zetsu, Ren, Hatsu)."
   },
   {
     name: "Genthru",
     aff: "Antagoniste (Greed Island)",
     nen: "Émission / Transformation",
-    power: "Little Flower / Countdown (« Bomber ») : bombes Nen déclenchées par contact et compte à rebours."
+    power: "« Le Bomber ». Little Flower (explosion d'aura concentrée dans la paume), Countdown (greffe une bombe à retardement sur une cible) et The Eternal Sun (scelle le compte à rebours sur lui-même)."
   }
 ];
 
@@ -316,7 +316,7 @@ const MAFIA = [
     note: "La plus grande des trois familles par les effectifs et les finances.",
     members: [
       { name: "Onior Longbao", role: "Boss", ability: "" },
-      { name: "Hinrigh Biganduffno", role: "Sous-boss (Underboss)", ability: "Spécialiste — doigts-crochets de torture et de crochetage." },
+      { name: "Hinrigh Biganduffno", role: "Sous-boss (Underboss)", ability: "Spécialiste expérimenté, chargé par son boss de retrouver Hisoka avant la Brigade Fantôme." },
       { name: "Wadako", role: "Membre", ability: "" },
       { name: "Sappher", role: "Membre", ability: "" }
     ]
@@ -358,12 +358,12 @@ const TROUPE = {
     status: "actif"
   },
   members: [
-    { name: "Nobunaga Hazama", nen: "Renforcement", ability: "Sabreur ; En au sabre couvrant un large rayon (4 m).", status: "actif" },
+    { name: "Nobunaga Hazama", nen: "Renforcement", ability: "Sabreur d'iai : son En au sabre couvre un large rayon (≈ 4 m) où il frappe d'un seul coup. Son véritable Hatsu n'a jamais été révélé.", status: "actif" },
     { name: "Feitan Portor", nen: "Transformation", ability: "Pain Packer (Rising Sun) : attaque solaire proportionnelle à sa douleur. Vice-capitaine temporaire.", status: "actif" },
     { name: "Machi Komacine", nen: "Transformation", ability: "Fils de Nen : recoud les membres, soigne et tend des câbles quasi invisibles.", status: "actif" },
     { name: "Phinks Magcub", nen: "Renforcement", ability: "Ripper Cyclone : coup dont la puissance croît avec le nombre de rotations du bras.", status: "actif" },
     { name: "Shizuku Murasaki", nen: "Matérialisation", ability: "Blinky (Deme-chan) : aspirateur Nen qui engloutit toute matière non vivante.", status: "actif" },
-    { name: "Bonolenov Ndongo", nen: "Matérialisation / Émission", ability: "Battle Cantabile : transforme ses blessures en instruments dont les sons deviennent des attaques.", status: "actif" },
+    { name: "Bonolenov Ndongo", nen: "Matérialisation / Émission", ability: "Battle Cantabile : Metamorphosen — ses blessures bandées deviennent des instruments dont les sons et danses se muent en attaques ; il peut aussi transformer son apparence (il s'est fait passer pour Hisoka).", status: "actif" },
     { name: "Franklin Bordeau", nen: "Émission", ability: "Double Machine Gun : tire des rafales de balles d'aura par le bout de ses doigts.", status: "actif" },
     { name: "Kalluto Zoldyck", nen: "Manipulation", ability: "Manipule papier et confettis Nen (« Dancing Hairpin »). A rejoint la Brigade pour remplacer Hisoka.", status: "actif" },
     { name: "Illumi Zoldyck", nen: "Manipulation", ability: "Manipulation par aiguilles. A intégré la Brigade (#11).", status: "actif" },
