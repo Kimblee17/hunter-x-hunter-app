@@ -2,9 +2,11 @@
    Logique de l'application Hunter x Hunter (vanilla JS)
    ============================================================ */
 
-/* Mettre à true pour activer le remplacement par vos propres images
-   déposées dans hxh/img/<slug>.jpg (voir img/README.md). */
-const USE_LOCAL_IMAGES = false;
+/* Si true, l'app remplace l'avatar généré par une vraie image du personnage
+   dès qu'un fichier hxh/img/<slug>.(jpg|png|webp) existe (voir img/README.md).
+   Sinon, l'avatar généré reste affiché. */
+const USE_LOCAL_IMAGES = true;
+const IMG_EXTS = ["jpg", "png", "webp", "jpeg"];
 
 /* ---------- Avatars (SVG générés + override image locale) ---------- */
 function slugify(name) {
@@ -41,21 +43,33 @@ function svgAvatarDataUri(name) {
   return "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svg)));
 }
 /* <img> : avatar SVG généré par défaut (zéro requête réseau).
-   Si USE_LOCAL_IMAGES, on tente de remplacer par img/<slug>.jpg si le fichier existe. */
+   Si USE_LOCAL_IMAGES, on tente de remplacer par img/<slug>.(jpg|png|webp) si présent. */
 function avatarImg(name, extraClass = "") {
   const uri = svgAvatarDataUri(name);
-  const local = "img/" + slugify(name) + ".jpg";
-  return `<img class="avatar ${extraClass}" alt="${name}" src="${uri}" data-local="${local}">`;
+  return `<img class="avatar ${extraClass}" alt="${name}" src="${uri}" data-slug="${slugify(name)}">`;
 }
+/* Cache par slug : URL trouvée (string) ou null si aucune image. Évite de re-sonder. */
+const localImgCache = {};
 /* Remplace les avatars par les images locales présentes, sans bloquer le rendu. */
 function upgradeLocalImages(root) {
   if (!USE_LOCAL_IMAGES) return;
-  (root || document).querySelectorAll("img.avatar[data-local]").forEach((img) => {
+  (root || document).querySelectorAll("img.avatar[data-slug]").forEach((img) => {
     if (img.dataset.done) return;
     img.dataset.done = "1";
-    const probe = new Image();
-    probe.onload = () => { img.src = img.dataset.local; };
-    probe.src = img.dataset.local;
+    const slug = img.dataset.slug;
+    const cached = localImgCache[slug];
+    if (typeof cached === "string") { img.src = cached; return; }
+    if (cached === null) return; // déjà cherché : aucune image
+    let i = 0;
+    const tryNext = () => {
+      if (i >= IMG_EXTS.length) { localImgCache[slug] = null; return; }
+      const url = "img/" + slug + "." + IMG_EXTS[i++];
+      const probe = new Image();
+      probe.onload = () => { localImgCache[slug] = url; img.src = url; };
+      probe.onerror = tryNext;
+      probe.src = url;
+    };
+    tryNext();
   });
 }
 
