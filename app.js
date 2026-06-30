@@ -73,6 +73,25 @@ function upgradeLocalImages(root) {
   });
 }
 
+/* ---------- Liens vers les fiches Fandom ---------- */
+/* Princes et reines ont une page « <Prénom> Hui Guo Rou » sur le wiki. */
+const ROYAL_NAMES = new Set([
+  ...PRINCES.map((p) => p.name),
+  ...QUEENS.map((q) => q.name.replace(/ Hui Guo Rou$/, ""))
+]);
+function wikiTitle(name) {
+  if (/Hui Guo Rou$/.test(name)) return name;
+  return ROYAL_NAMES.has(name) ? name + " Hui Guo Rou" : name;
+}
+function wikiUrl(name) {
+  return "https://hunterxhunter.fandom.com/wiki/" +
+    encodeURIComponent(wikiTitle(name).replace(/ /g, "_"));
+}
+/* Enrobe un texte dans un lien vers la fiche Fandom (nouvel onglet). */
+function wikiLink(name, cls = "wiki-link") {
+  return `<a class="${cls}" href="${wikiUrl(name)}" target="_blank" rel="noopener noreferrer">${name}</a>`;
+}
+
 /* ---------- Onglets ---------- */
 document.getElementById("tabs").addEventListener("click", (e) => {
   const btn = e.target.closest(".tab");
@@ -192,12 +211,17 @@ function renderCharacters() {
     return;
   }
   list.forEach((c) => {
-    const card = document.createElement("div");
+    const card = document.createElement("a");
     card.className = "char-card";
+    card.href = wikiUrl(c.name);
+    card.target = "_blank";
+    card.rel = "noopener noreferrer";
+    card.title = "Voir la fiche sur Fandom";
     card.innerHTML = `
       <div class="char-head">
         ${avatarImg(c.name)}
         <h3>${c.name}</h3>
+        <span class="ext" aria-hidden="true">↗</span>
       </div>
       <div class="char-aff">${c.aff}</div>
       ${c.nen ? `<div><span class="char-nen">${c.nen}</span></div>` : ""}
@@ -222,7 +246,7 @@ function renderQueens() {
       <div class="queen-head">
         ${avatarImg(q.name, "round")}
         <span class="rank">${q.rank}</span>
-        <span class="qname">${q.name}</span>
+        <span class="qname">${wikiLink(q.name, "wiki-link qname-link")}</span>
       </div>
       ${q.note ? `<p class="queen-note">${q.note}</p>` : '<p class="queen-note"></p>'}
       <div class="prince-list"></div>`;
@@ -259,6 +283,7 @@ function openPrince(p) {
         <div class="m-sub">Enfant de la ${queen.rank} — ${queen.name}</div>
       </div>
     </div>
+    <a class="wiki-btn" href="${wikiUrl(p.name)}" target="_blank" rel="noopener noreferrer">Voir la fiche sur Fandom ↗</a>
     ${p.mafia ? `<div class="m-mafia">⚑ Mécène de la famille ${p.mafia}</div>` : ""}
     <p class="m-desc">${p.desc}</p>
     <h4>Bête de Nen</h4>
@@ -269,7 +294,7 @@ function openPrince(p) {
         <li class="ent-item">
           ${avatarImg(e.name, "round")}
           <div>
-            <div class="en">${e.name}</div>
+            <div class="en">${GENERIC_NAME.test(e.name) ? e.name : wikiLink(e.name)}</div>
             <div class="er">${e.role}</div>
           </div>
         </li>`).join("")}
@@ -302,7 +327,7 @@ function renderMafia() {
             <div class="mem ${cls}">
               ${avatarImg(m.name, "round")}
               <div class="mem-body">
-                <div class="mn">${m.name}</div>
+                <div class="mn">${GENERIC_NAME.test(m.name) ? m.name : wikiLink(m.name)}</div>
                 ${m.role ? `<div class="mr">${m.role}</div>` : ""}
                 ${m.ability ? `<div class="ma">${m.ability}</div>` : ""}
               </div>
@@ -322,7 +347,7 @@ function renderTroupe() {
     <div class="troupe-leader">
       ${avatarImg(L.name, "round")}
       <div class="role">${L.role}</div>
-      <h3>${L.name}</h3>
+      <h3>${wikiLink(L.name, "wiki-link")}</h3>
       <div><span class="char-nen">${L.nen}</span></div>
       <p class="char-power">${L.ability}</p>
     </div>
@@ -334,7 +359,7 @@ function renderTroupe() {
     card.innerHTML = `
       <div class="member-head">
         ${avatarImg(m.name, "round")}
-        <h4>${m.name}<span class="status-pill status-${m.status}">${m.status}</span></h4>
+        <h4>${wikiLink(m.name, "wiki-link")}<span class="status-pill status-${m.status}">${m.status}</span></h4>
       </div>
       <div><span class="char-nen">${m.nen}</span></div>
       <p class="char-power">${m.ability}</p>`;

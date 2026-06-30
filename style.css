@@ -121,17 +121,22 @@ main { max-width: 1100px; margin: 0 auto; padding: 20px 16px 60px; }
   gap: 14px;
 }
 .char-card {
+  display: block;
   background: linear-gradient(180deg, var(--bg-card), var(--bg-soft));
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 16px;
   box-shadow: var(--shadow);
   transition: .15s;
+  color: inherit;
+  text-decoration: none;
 }
 .char-card:hover { border-color: var(--accent); transform: translateY(-2px); }
 .char-head { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
 .char-head .avatar { width: 56px; height: 56px; }
 .char-head h3 { margin: 0; }
+.char-head .ext { margin-left: auto; color: var(--muted); font-size: 16px; transition: .15s; }
+.char-card:hover .ext { color: var(--accent); }
 .char-card h3 { margin: 0 0 8px; font-size: 18px; }
 .char-aff { display: inline-block; font-size: 12px; color: var(--accent); margin-bottom: 8px; font-weight: 600; }
 .char-nen {
@@ -146,6 +151,23 @@ main { max-width: 1100px; margin: 0 auto; padding: 20px 16px 60px; }
 }
 .char-power { font-size: 13.5px; color: var(--text); line-height: 1.5; margin: 0; }
 .empty { color: var(--muted); padding: 30px; text-align: center; }
+
+/* ---------- Liens Fandom ---------- */
+.wiki-link { color: inherit; text-decoration: none; border-bottom: 1px dotted transparent; transition: .15s; }
+.wiki-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.wiki-btn {
+  display: inline-block;
+  margin: 2px 0 14px;
+  padding: 6px 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #06241f;
+  background: var(--accent);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: .15s;
+}
+.wiki-btn:hover { filter: brightness(1.08); }
 
 /* ---------- Succession org ---------- */
 .org-queens { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
