@@ -1,0 +1,310 @@
+:root {
+  --bg: #0e1116;
+  --bg-soft: #161b22;
+  --bg-card: #1c2230;
+  --border: #2b3242;
+  --text: #e6e9ef;
+  --muted: #9aa4b2;
+  --accent: #2dd4bf;     /* teal Nen */
+  --accent-2: #a78bfa;   /* violet */
+  --gold: #f4c44a;
+  --red: #f87171;
+  --shadow: 0 6px 24px rgba(0,0,0,.45);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: radial-gradient(1200px 600px at 50% -10%, #1b2330 0%, var(--bg) 60%);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ---------- Header & tabs ---------- */
+.site-header {
+  text-align: center;
+  padding: 28px 16px 12px;
+}
+.site-header h1 {
+  margin: 0;
+  font-size: clamp(28px, 5vw, 46px);
+  letter-spacing: 2px;
+  font-weight: 800;
+}
+.site-header .x { color: var(--accent); }
+.subtitle { color: var(--muted); margin: 6px 0 0; letter-spacing: 1px; }
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  padding: 16px;
+  position: sticky;
+  top: 0;
+  background: rgba(14,17,22,.85);
+  backdrop-filter: blur(8px);
+  z-index: 20;
+  border-bottom: 1px solid var(--border);
+}
+.tab {
+  background: var(--bg-soft);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 10px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: .15s;
+}
+.tab:hover { color: var(--text); border-color: var(--accent); }
+.tab.active {
+  color: #06241f;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+main { max-width: 1100px; margin: 0 auto; padding: 20px 16px 60px; }
+
+.panel { display: none; animation: fade .25s ease; }
+.panel.active { display: block; }
+@keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+.panel-head { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.panel-head h2 { margin: 0; font-size: 22px; }
+.hint { color: var(--muted); margin: 4px 0 18px; font-size: 14px; }
+
+#char-search {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  padding: 10px 14px;
+  min-width: 260px;
+  font-size: 14px;
+}
+#char-search:focus { outline: none; border-color: var(--accent); }
+
+/* ---------- Filters ---------- */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.filter-chip {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 12.5px;
+  cursor: pointer;
+  transition: .15s;
+}
+.filter-chip:hover { color: var(--text); }
+.filter-chip.active { background: var(--accent-2); color: #1a1030; border-color: var(--accent-2); }
+
+/* ---------- Avatars ---------- */
+.avatar {
+  object-fit: cover;
+  border-radius: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  display: block;
+  flex: 0 0 auto;
+}
+.avatar.round { border-radius: 50%; }
+
+/* ---------- Character cards ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+.char-card {
+  background: linear-gradient(180deg, var(--bg-card), var(--bg-soft));
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+  transition: .15s;
+}
+.char-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.char-head { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.char-head .avatar { width: 56px; height: 56px; }
+.char-head h3 { margin: 0; }
+.char-card h3 { margin: 0 0 8px; font-size: 18px; }
+.char-aff { display: inline-block; font-size: 12px; color: var(--accent); margin-bottom: 8px; font-weight: 600; }
+.char-nen {
+  display: inline-block;
+  font-size: 11px;
+  background: rgba(167,139,250,.15);
+  color: var(--accent-2);
+  border: 1px solid rgba(167,139,250,.4);
+  padding: 2px 8px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+.char-power { font-size: 13.5px; color: var(--text); line-height: 1.5; margin: 0; }
+.empty { color: var(--muted); padding: 30px; text-align: center; }
+
+/* ---------- Succession org ---------- */
+.org-queens { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.queen-block {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  position: relative;
+}
+.queen-head { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; position: relative; z-index: 1; }
+.queen-head .avatar { width: 30px; height: 30px; }
+.queen-head .rank { color: var(--gold); font-size: 12px; font-weight: 700; }
+.queen-head .qname { font-size: 17px; font-weight: 700; }
+.queen-note { color: var(--muted); font-size: 12px; margin: 0 0 12px; position: relative; z-index: 1; }
+.prince-list { display: flex; flex-direction: column; gap: 8px; }
+.prince-node {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  color: var(--text);
+  transition: .15s;
+  position: relative;
+  z-index: 1;
+}
+.prince-node .avatar { width: 30px; height: 30px; }
+.prince-node:hover { border-color: var(--accent); background: #232b3b; }
+.prince-num {
+  flex: 0 0 auto;
+  width: 28px; height: 28px;
+  display: grid; place-items: center;
+  background: var(--accent); color: #06241f;
+  border-radius: 50%; font-weight: 800; font-size: 13px;
+}
+.prince-node .pname { font-weight: 700; font-size: 15px; }
+.prince-node .ptag { font-size: 11px; color: var(--red); margin-left: auto; }
+
+/* ---------- Mafia org ---------- */
+.mafia-org { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; }
+.clan {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+}
+.clan-prince, .clan-name, .clan-note, .clan-members { position: relative; z-index: 1; }
+.clan-prince {
+  background: linear-gradient(180deg, rgba(244,196,74,.18), transparent);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 16px;
+  text-align: center;
+}
+.clan-prince .label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+.clan-prince .pn { font-size: 18px; font-weight: 800; color: var(--gold); }
+.connector { text-align: center; color: var(--border); font-size: 18px; line-height: 1; }
+.clan-name { text-align: center; font-size: 20px; font-weight: 800; padding: 8px 0 2px; }
+.clan-note { text-align: center; color: var(--muted); font-size: 12px; padding: 0 16px 10px; }
+.clan-members { padding: 0 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+.mem {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.mem .avatar { width: 38px; height: 38px; }
+.mem-body { flex: 1; }
+.mem.boss { border-left: 3px solid var(--gold); }
+.mem.under { border-left: 3px solid var(--accent); }
+.mem .mn { font-weight: 700; font-size: 14px; }
+.mem .mr { font-size: 11.5px; color: var(--accent); }
+.mem .ma { font-size: 12.5px; color: var(--muted); margin-top: 4px; line-height: 1.45; }
+
+/* ---------- Troupe org ---------- */
+.troupe-org { display: flex; flex-direction: column; align-items: center; gap: 0; position: relative; padding-top: 4px; }
+.troupe-leader {
+  background: linear-gradient(180deg, var(--bg-card), var(--bg-soft));
+  border: 2px solid var(--accent-2);
+  border-radius: 16px;
+  padding: 18px 22px;
+  max-width: 480px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 1;
+}
+.troupe-leader .avatar { width: 72px; height: 72px; margin: 0 auto 8px; }
+.troupe-leader .role { color: var(--accent-2); font-weight: 700; font-size: 12px; letter-spacing: 1px; }
+.troupe-leader h3 { margin: 4px 0 8px; font-size: 22px; }
+.troupe-members { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; width: 100%; margin-top: 16px; }
+.member-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  position: relative;
+  z-index: 1;
+}
+.member-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.member-head .avatar { width: 42px; height: 42px; }
+.member-head h4 { margin: 0; }
+.member-card.ancien { border-style: dashed; opacity: .92; }
+.member-card.décédé, .member-card.décédée { opacity: .7; }
+.member-card h4 { margin: 0 0 6px; font-size: 16px; }
+.status-pill { font-size: 10px; padding: 2px 7px; border-radius: 6px; margin-left: 6px; vertical-align: middle; }
+.status-actif { background: rgba(45,212,191,.15); color: var(--accent); }
+.status-ancien { background: rgba(244,196,74,.15); color: var(--gold); }
+.status-décédé, .status-décédée { background: rgba(248,113,113,.15); color: var(--red); }
+
+/* ---------- Modal ---------- */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.65);
+  display: grid; place-items: center;
+  padding: 20px; z-index: 50;
+}
+.modal-overlay[hidden] { display: none; }
+.modal {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  max-width: 520px; width: 100%;
+  max-height: 85vh; overflow-y: auto;
+  padding: 24px; position: relative;
+  box-shadow: var(--shadow);
+  animation: fade .2s ease;
+}
+.modal-close {
+  position: absolute; top: 12px; right: 14px;
+  background: none; border: none; color: var(--muted);
+  font-size: 28px; line-height: 1; cursor: pointer;
+}
+.modal-close:hover { color: var(--text); }
+.modal-title { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+.modal-title .avatar { width: 64px; height: 64px; }
+.modal h3 { margin: 0 0 2px; font-size: 24px; }
+.modal .m-sub { color: var(--gold); font-size: 13px; font-weight: 600; }
+.ent-item { display: flex; align-items: center; gap: 10px; }
+.ent-item .avatar { width: 34px; height: 34px; }
+.modal .m-desc { color: var(--text); font-size: 14px; line-height: 1.55; margin: 0 0 16px; }
+.modal .m-mafia {
+  display: inline-block; font-size: 12px; color: var(--red);
+  border: 1px solid rgba(248,113,113,.4); border-radius: 6px;
+  padding: 3px 9px; margin-bottom: 14px;
+}
+.modal h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin: 0 0 10px; }
+.ent-list { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.ent-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
+.ent-item .en { font-weight: 700; font-size: 14px; }
+.ent-item .er { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+/* ---------- Footer ---------- */
+.site-footer { text-align: center; color: var(--muted); font-size: 12px; padding: 24px 16px 40px; border-top: 1px solid var(--border); }

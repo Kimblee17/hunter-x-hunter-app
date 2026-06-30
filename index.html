@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hunter × Hunter — Personnages & Organigrammes</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Hunter <span class="x">×</span> Hunter</h1>
+    <p class="subtitle">Personnages, Nen &amp; organigrammes</p>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <button class="tab active" data-tab="characters">Personnages</button>
+    <button class="tab" data-tab="succession">Guerre de Succession</button>
+    <button class="tab" data-tab="mafia">Clans du Black Whale</button>
+    <button class="tab" data-tab="troupe">Brigade Fantôme</button>
+  </nav>
+
+  <main>
+    <!-- ===== Personnages ===== -->
+    <section id="characters" class="panel active">
+      <div class="panel-head">
+        <h2>Liste des personnages</h2>
+        <input type="search" id="char-search" placeholder="Rechercher un nom, une organisation…" />
+      </div>
+      <div class="filters" id="aff-filters"></div>
+      <div class="card-grid" id="char-grid"></div>
+    </section>
+
+    <!-- ===== Guerre de Succession ===== -->
+    <section id="succession" class="panel">
+      <div class="panel-head">
+        <h2>Guerre de Succession — 14 princes &amp; 8 reines</h2>
+      </div>
+      <p class="hint">Les princes sont regroupés sous leur reine-mère. Cliquez sur un prince pour afficher son entourage.</p>
+      <div class="org-queens" id="queens-org"></div>
+    </section>
+
+    <!-- ===== Clans mafieux ===== -->
+    <section id="mafia" class="panel">
+      <div class="panel-head">
+        <h2>Les 3 clans mafieux du Black Whale</h2>
+      </div>
+      <p class="hint">Chaque clan est dirigé / financé par un prince de Kakin.</p>
+      <div class="mafia-org" id="mafia-org"></div>
+    </section>
+
+    <!-- ===== Brigade Fantôme ===== -->
+    <section id="troupe" class="panel">
+      <div class="panel-head">
+        <h2>Brigade Fantôme — Genei Ryodan</h2>
+      </div>
+      <p class="hint">L'Araignée : un chef et ses membres (les « pattes »).</p>
+      <div class="troupe-org" id="troupe-org"></div>
+    </section>
+  </main>
+
+  <!-- Modale entourage prince -->
+  <div class="modal-overlay" id="modal" hidden>
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modal-close" aria-label="Fermer">×</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    Données : manga <em>Hunter × Hunter</em> de Yoshihiro Togashi. Application non officielle, à but informatif.
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
