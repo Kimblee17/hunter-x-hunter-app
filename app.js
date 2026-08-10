@@ -42,11 +42,68 @@ function svgAvatarDataUri(name) {
     `</svg>`;
   return "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svg)));
 }
+/* ---------- Noms d'affichage VF (manga Kana) ---------- */
+/* Clé = nom canonique interne (utilisé pour les slugs d'images ET les liens Fandom).
+   Valeur = orthographe affichée en version française. On ne mappe QUE les noms
+   confirmés par une source VF ; les autres s'affichent tels quels (identiques en VF
+   pour la grande majorité). Ainsi, changer l'affichage ne casse ni images ni liens. */
+/* Source : wiki Hunter x Hunter FR (fandom.com/fr). Seuls les noms qui diffèrent
+   de la VF sont listés ; les autres (Gon Freecss, Kurapika, Hisoka Morow, Meruem,
+   Knuckle Bine, Wing…) sont déjà identiques et s'affichent tels quels. */
+const FR_NAMES = {
+  // Personnages
+  "Killua Zoldyck": "Kirua Zoldik",
+  "Leorio Paradinight": "Leolio Paradinaito",
+  "Chrollo Lucilfer": "Kuroro Lucifer",
+  "Illumi Zoldyck": "Irumi Zoldik",
+  "Neferpitou": "Neferpitô",
+  "Shaiapouf": "Shauapufu",
+  "Menthuthuyoupi": "Montutyupi",
+  "Biscuit Krueger": "Biscuit Kruger",
+  "Kite": "Kaito",
+  "Shoot McMahon": "Shoot MacMahon",
+  "Morel Mackernasey": "Morau McCarnathy",
+  "Palm Siberia": "Pamû Shiberia",
+  "Feitan Portor": "Feitan Pohtoh",
+  "Zeno Zoldyck": "Zeno Zoldik",
+  "Silva Zoldyck": "Silva Zoldik",
+  // Brigade Fantôme
+  "Machi Komacine": "Machi Komachine",
+  "Phinks Magcub": "Phinks Magkav",
+  "Bonolenov Ndongo": "Bonorenof Ndongo",
+  "Franklin Bordeau": "Franklin Bordeaux",
+  "Kalluto Zoldyck": "Karuto Zoldik",
+  "Uvogin": "Uvoguine",
+  "Shalnark": "Sharnalk",
+  "Kortopi": "Korutopi",
+  // Entourage / mafia
+  "Babimyna": "Babimayna",
+  "Sayird": "Sayrid",
+  "Hinrigh Biganduffno": "Hinrigh Biganduffo",
+  // Reines de Kakin (famille « Hoicoro »)
+  "Unma Hui Guo Rou": "Unma Hoicoro",
+  "Duazul Hui Guo Rou": "Duazul Hoicoro",
+  "Tang Zhao": "Tang Zhao Li Hoicoro",
+  "Katrono": "Katrono Hoicoro",
+  "Swinko-swinko": "Swinko-Swinko Hoicoro",
+  "Seiko": "Seiko Hoicoro",
+  "Sevanti": "Sevanchi Hoicoro",
+  "Oito": "Oito Hoicoro",
+  // Princes de Kakin (prénoms VF ; « Hoicoro » en nom de famille)
+  "Camilla": "Camillia",
+  "Zhang Lei": "Chôrai",
+  "Tubeppa": "Tsubeppa",
+  "Salé-salé": "Salé-Salé",
+  "Fugetsu": "Fûgetsu",
+  "Marayam": "Maryam"
+};
+function disp(name) { return FR_NAMES[name] || name; }
+
 /* <img> : avatar SVG généré par défaut (zéro requête réseau).
    Si USE_LOCAL_IMAGES, on tente de remplacer par img/<slug>.(jpg|png|webp) si présent. */
 function avatarImg(name, extraClass = "") {
   const uri = svgAvatarDataUri(name);
-  return `<img class="avatar ${extraClass}" alt="${name}" src="${uri}" data-slug="${slugify(name)}">`;
+  return `<img class="avatar ${extraClass}" alt="${disp(name)}" src="${uri}" data-slug="${slugify(name)}">`;
 }
 /* Cache par slug : URL trouvée (string) ou null si aucune image. Évite de re-sonder. */
 const localImgCache = {};
@@ -89,7 +146,7 @@ function wikiUrl(name) {
 }
 /* Enrobe un texte dans un lien vers la fiche Fandom (nouvel onglet). */
 function wikiLink(name, cls = "wiki-link") {
-  return `<a class="${cls}" href="${wikiUrl(name)}" target="_blank" rel="noopener noreferrer">${name}</a>`;
+  return `<a class="${cls}" href="${wikiUrl(name)}" target="_blank" rel="noopener noreferrer">${disp(name)}</a>`;
 }
 
 /* ---------- Onglets ---------- */
@@ -199,6 +256,7 @@ function renderCharacters() {
     const matchAff = activeAff === "Toutes" || affKey(c.aff) === activeAff;
     const matchQ = !q ||
       c.name.toLowerCase().includes(q) ||
+      disp(c.name).toLowerCase().includes(q) ||
       c.aff.toLowerCase().includes(q) ||
       (c.desc || "").toLowerCase().includes(q) ||
       (c.nen || "").toLowerCase().includes(q);
@@ -220,7 +278,7 @@ function renderCharacters() {
     card.innerHTML = `
       <div class="char-head">
         ${avatarImg(c.name)}
-        <h3>${c.name}</h3>
+        <h3>${disp(c.name)}</h3>
         <span class="ext" aria-hidden="true">↗</span>
       </div>
       <div class="char-aff">${c.aff}</div>
@@ -257,7 +315,7 @@ function renderQueens() {
       node.innerHTML = `
         <span class="prince-num">${p.num}</span>
         ${avatarImg(p.name, "round")}
-        <span class="pname">${p.name}</span>
+        <span class="pname">${disp(p.name)}</span>
         ${p.mafia ? `<span class="ptag">⚑ ${p.mafia}</span>` : ""}`;
       node.onclick = () => openPrince(p);
       pl.appendChild(node);
@@ -279,8 +337,8 @@ function openPrince(p) {
     <div class="modal-title">
       ${avatarImg(p.name, "round")}
       <div>
-        <h3>${p.num}. Prince ${p.name}</h3>
-        <div class="m-sub">Enfant de la ${queen.rank} — ${queen.name}</div>
+        <h3>${p.num}. Prince ${disp(p.name)}</h3>
+        <div class="m-sub">Enfant de la ${queen.rank} — ${disp(queen.name)}</div>
       </div>
     </div>
     <a class="wiki-btn" href="${wikiUrl(p.name)}" target="_blank" rel="noopener noreferrer">Voir la fiche sur Fandom ↗</a>
@@ -294,7 +352,7 @@ function openPrince(p) {
         <li class="ent-item">
           ${avatarImg(e.name, "round")}
           <div>
-            <div class="en">${GENERIC_NAME.test(e.name) ? e.name : wikiLink(e.name)}</div>
+            <div class="en">${GENERIC_NAME.test(e.name) ? disp(e.name) : wikiLink(e.name)}</div>
             <div class="er">${e.role}</div>
           </div>
         </li>`).join("")}
@@ -315,7 +373,7 @@ function renderMafia() {
     el.innerHTML = `
       <div class="clan-prince">
         <div class="label">Prince mécène</div>
-        <div class="pn">${clan.princeNum}. ${clan.princeName}</div>
+        <div class="pn">${clan.princeNum}. ${disp(clan.princeName)}</div>
       </div>
       <div class="clan-name">${clan.name}</div>
       <div class="clan-note">${clan.note}</div>
@@ -327,7 +385,7 @@ function renderMafia() {
             <div class="mem ${cls}">
               ${avatarImg(m.name, "round")}
               <div class="mem-body">
-                <div class="mn">${GENERIC_NAME.test(m.name) ? m.name : wikiLink(m.name)}</div>
+                <div class="mn">${GENERIC_NAME.test(m.name) ? disp(m.name) : wikiLink(m.name)}</div>
                 ${m.role ? `<div class="mr">${m.role}</div>` : ""}
                 ${m.ability ? `<div class="ma">${m.ability}</div>` : ""}
               </div>
