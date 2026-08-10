@@ -171,7 +171,7 @@ const QUEENS = [
 const PRINCES = [
   {
     num: 1, name: "Benjamin", queen: "Q1", mafia: null,
-    beast: "Bête gardienne issue de la cérémonie de l'Urne aux Graines. Ses capacités restent en grande partie tenues secrètes ; elle lui permettrait d'hériter des pouvoirs Nen de ses soldats fidèles à leur mort.",
+    beast: "Bête gardienne issue de la cérémonie de l'Urne aux Graines (elle ne peut ni combattre une autre bête gardienne ni attaquer son hôte). Sa capacité, « Benjamin Baton », lui permet d'hériter des pouvoirs Nen de ses subordonnés décédés — les soldats de son escouade diplômés de l'Académie militaire royale de Kakin — qui apparaissent sous forme d'étoiles sur ses paumes.",
     desc: "L'aîné, conseiller militaire adjoint. Guerrier impitoyable et favori pour le trône ; commande une armée privée d'élite loyale jusqu'à la mort.",
     entourage: [
       { name: "Balsamilco Might", role: "Aide de camp / chef d'état-major" },
