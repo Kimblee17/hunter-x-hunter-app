@@ -6,7 +6,7 @@
    dès qu'un fichier hxh/img/<slug>.(jpg|png|webp) existe (voir img/README.md).
    Sinon, l'avatar généré reste affiché. */
 const USE_LOCAL_IMAGES = true;
-const IMG_EXTS = ["jpg", "png", "webp", "jpeg"];
+const IMG_EXTS = ["webp", "jpg", "png", "jpeg"];
 
 /* ---------- Avatars (SVG générés + override image locale) ---------- */
 function slugify(name) {
@@ -95,9 +95,32 @@ const FR_NAMES = {
   "Tubeppa": "Tsubeppa",
   "Salé-salé": "Salé-Salé",
   "Fugetsu": "Fûgetsu",
-  "Marayam": "Maryam"
+  "Marayam": "Maryam",
+  // Hunter
+  "Ging Freecss": "Jin Freecss"
 };
 function disp(name) { return FR_NAMES[name] || name; }
+
+/* Francisation des textes libres (affiliations, descriptions, rôles…) : remplace
+   les termes/noms cités dans les phrases par leur graphie VF (mot entier, accents
+   gérés). Termes sourcés sur le wiki FR ; le reste est laissé tel quel. */
+const LOCALIZE = [
+  ["Zhang Lei", "Chôrai"], ["Salé-salé", "Salé-Salé"],
+  ["Zoldyck", "Zoldik"], ["Kurta", "Kuruta"], ["Ging", "Jin"], ["Morel", "Morau"],
+  ["Killua", "Kirua"], ["Leorio", "Leolio"], ["Chrollo", "Kuroro"],
+  ["Illumi", "Irumi"], ["Kalluto", "Karuto"],
+  ["Fugetsu", "Fûgetsu"], ["Camilla", "Camillia"], ["Sevanti", "Sevanchi"],
+  ["Tubeppa", "Tsubeppa"]
+].map(([en, fr]) => [
+  new RegExp("(^|[^\\p{L}])" + en.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "(?![\\p{L}])", "gu"),
+  fr
+]);
+function localize(text) {
+  if (!text) return text;
+  let out = text;
+  for (const [re, fr] of LOCALIZE) out = out.replace(re, (m, p1) => p1 + fr);
+  return out;
+}
 
 /* <img> : avatar SVG généré par défaut (zéro requête réseau).
    Si USE_LOCAL_IMAGES, on tente de remplacer par img/<slug>.(jpg|png|webp) si présent. */
@@ -281,9 +304,9 @@ function renderCharacters() {
         <h3>${disp(c.name)}</h3>
         <span class="ext" aria-hidden="true">↗</span>
       </div>
-      <div class="char-aff">${c.aff}</div>
+      <div class="char-aff">${localize(c.aff)}</div>
       ${c.nen ? `<div><span class="char-nen">${c.nen}</span></div>` : ""}
-      <p class="char-power">${c.desc}</p>`;
+      <p class="char-power">${localize(c.desc)}</p>`;
     grid.appendChild(card);
   });
   upgradeLocalImages(grid);
@@ -306,7 +329,7 @@ function renderQueens() {
         <span class="rank">${q.rank}</span>
         <span class="qname">${wikiLink(q.name, "wiki-link qname-link")}</span>
       </div>
-      ${q.note ? `<p class="queen-note">${q.note}</p>` : '<p class="queen-note"></p>'}
+      ${q.note ? `<p class="queen-note">${localize(q.note)}</p>` : '<p class="queen-note"></p>'}
       <div class="prince-list"></div>`;
     const pl = block.querySelector(".prince-list");
     princes.forEach((p) => {
@@ -343,17 +366,17 @@ function openPrince(p) {
     </div>
     <a class="wiki-btn" href="${wikiUrl(p.name)}" target="_blank" rel="noopener noreferrer">Voir la fiche sur Fandom ↗</a>
     ${p.mafia ? `<div class="m-mafia">⚑ Mécène de la famille ${p.mafia}</div>` : ""}
-    <p class="m-desc">${p.desc}</p>
+    <p class="m-desc">${localize(p.desc)}</p>
     <h4>Bête de Nen</h4>
-    <p class="m-desc">${p.beast}</p>
+    <p class="m-desc">${localize(p.beast)}</p>
     <h4>Entourage</h4>
     <ul class="ent-list">
       ${p.entourage.map((e) => `
         <li class="ent-item">
           ${avatarImg(e.name, "round")}
           <div>
-            <div class="en">${GENERIC_NAME.test(e.name) ? disp(e.name) : wikiLink(e.name)}</div>
-            <div class="er">${e.role}</div>
+            <div class="en">${GENERIC_NAME.test(e.name) ? localize(e.name) : wikiLink(e.name)}</div>
+            <div class="er">${localize(e.role)}</div>
           </div>
         </li>`).join("")}
     </ul>`;
@@ -376,7 +399,7 @@ function renderMafia() {
         <div class="pn">${clan.princeNum}. ${disp(clan.princeName)}</div>
       </div>
       <div class="clan-name">${clan.name}</div>
-      <div class="clan-note">${clan.note}</div>
+      <div class="clan-note">${localize(clan.note)}</div>
       <div class="clan-members">
         ${clan.members.map((m) => {
           const cls = /boss|chef/i.test(m.role) && !/sous/i.test(m.role) ? "boss"
@@ -385,9 +408,9 @@ function renderMafia() {
             <div class="mem ${cls}">
               ${avatarImg(m.name, "round")}
               <div class="mem-body">
-                <div class="mn">${GENERIC_NAME.test(m.name) ? disp(m.name) : wikiLink(m.name)}</div>
-                ${m.role ? `<div class="mr">${m.role}</div>` : ""}
-                ${m.ability ? `<div class="ma">${m.ability}</div>` : ""}
+                <div class="mn">${GENERIC_NAME.test(m.name) ? localize(m.name) : wikiLink(m.name)}</div>
+                ${m.role ? `<div class="mr">${localize(m.role)}</div>` : ""}
+                ${m.ability ? `<div class="ma">${localize(m.ability)}</div>` : ""}
               </div>
             </div>`;
         }).join("")}
@@ -407,7 +430,7 @@ function renderTroupe() {
       <div class="role">${L.role}</div>
       <h3>${wikiLink(L.name, "wiki-link")}</h3>
       <div><span class="char-nen">${L.nen}</span></div>
-      <p class="char-power">${L.ability}</p>
+      <p class="char-power">${localize(L.ability)}</p>
     </div>
     <div class="troupe-members"></div>`;
   const wrap = troupeOrg.querySelector(".troupe-members");
@@ -420,7 +443,7 @@ function renderTroupe() {
         <h4>${wikiLink(m.name, "wiki-link")}<span class="status-pill status-${m.status}">${m.status}</span></h4>
       </div>
       <div><span class="char-nen">${m.nen}</span></div>
-      <p class="char-power">${m.ability}</p>`;
+      <p class="char-power">${localize(m.ability)}</p>`;
     wrap.appendChild(card);
   });
 }
